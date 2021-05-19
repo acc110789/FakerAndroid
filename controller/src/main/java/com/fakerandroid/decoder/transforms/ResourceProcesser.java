@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class ResourceProcesser extends Transform {
     @Override
@@ -58,11 +59,14 @@ public class ResourceProcesser extends Transform {
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        if(metaInfo!=null){
+        if(metaInfo!=null) {
             manifestInfo.setVersionCode(metaInfo.versionInfo.versionCode);
             manifestInfo.setVersionName(metaInfo.versionInfo.versionName);
-            manifestInfo.setMinSdkVersion(metaInfo.sdkInfo.get("minSdkVersion"));
-            manifestInfo.setTargetSdkVersion(metaInfo.sdkInfo.get("targetSdkVersion"));
+            Map<String, String> sdkInfo = metaInfo.sdkInfo;
+            if (sdkInfo != null) {
+                manifestInfo.setMinSdkVersion(sdkInfo.get("minSdkVersion"));
+                manifestInfo.setTargetSdkVersion(sdkInfo.get("targetSdkVersion"));
+            }
         }
         androidProject.addIntermediate(AndroidProject.INTERMEDIATE_MANIFESTINFO,manifestInfo);
     }

@@ -18,6 +18,12 @@ allprojects {
     }
     repositories {
         mavenLocal()
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/groups/public/'
+        }
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/repositories/release/'
+        }
         mavenCentral()
         jcenter()
         google()
@@ -26,6 +32,13 @@ allprojects {
 buildscript {
     ext.kotlin_version = '1.4.32'
     repositories {
+        mavenLocal()
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/groups/public/'
+        }
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/repositories/release/'
+        }
         jcenter()
     }
     tasks.withType(JavaCompile) {
